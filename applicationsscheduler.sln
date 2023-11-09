@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "applicationsscheduler", "applicationsscheduler\applicationsscheduler.csproj", "{378ED95E-3AA2-43D6-B6E4-6A5DDC4D1069}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "applicationsscheduler", "applicationsscheduler\applicationsscheduler.csproj", "{B2C79CAD-F5DA-4944-A7F2-3E5D378B8BD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{378ED95E-3AA2-43D6-B6E4-6A5DDC4D1069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{378ED95E-3AA2-43D6-B6E4-6A5DDC4D1069}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{378ED95E-3AA2-43D6-B6E4-6A5DDC4D1069}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{378ED95E-3AA2-43D6-B6E4-6A5DDC4D1069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C79CAD-F5DA-4944-A7F2-3E5D378B8BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C79CAD-F5DA-4944-A7F2-3E5D378B8BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C79CAD-F5DA-4944-A7F2-3E5D378B8BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C79CAD-F5DA-4944-A7F2-3E5D378B8BD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C13519D0-6057-4AD4-8FF3-5530C27B7395}
+		SolutionGuid = {1507A73C-0917-49D9-A399-6C35305B3969}
 	EndGlobalSection
 EndGlobal
