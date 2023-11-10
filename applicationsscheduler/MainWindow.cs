@@ -6,12 +6,11 @@ namespace applicationsscheduler
     {
         private DateTime startTime;
         private DateTime endTime;
-        private DateTime currentTime;
         private Process? process;
         private string? processPath;
-        private string? friendlyProcessName;
         private int processKilled = 0;
         private object? selectedProcess;
+        private int abort = 0;
 
         public MainWindow()
         {
@@ -41,9 +40,9 @@ namespace applicationsscheduler
         private void UpdateProcessView(string? searchString = null)
         {
             string? query = searchString?.ToLower();
-            foreach (Process process in Process.GetProcesses())
+            foreach (Process p in Process.GetProcesses())
             {
-                string processName = process.ProcessName;
+                string processName = p.ProcessName;
                 if (query == null)
                 {
                     processListBox.Items.Add(processName);
@@ -68,9 +67,11 @@ namespace applicationsscheduler
         {
             if (selectedProcess != null)
             {
-                //Process[] processes = Process.GetProcessesByName((string)selectedProcess);
-                //processes[0].Kill();
-                processListBox.SelectedItems.Remove(selectedProcess);
+                Process[] processes = Process.GetProcessesByName((string)selectedProcess);
+                processes[0].Kill();
+                processListBox.Items.Clear();
+                Thread.Sleep(50);
+                UpdateProcessView(searchProcessBox.Text);
             }
         }
 
@@ -78,6 +79,95 @@ namespace applicationsscheduler
         {
             selectedProcessLabel.Text = processListBox.SelectedItem != null ? processListBox.SelectedItem.ToString() : "";
             selectedProcess = processListBox.SelectedItem;
+        }
+
+        private void refreshProcessBtn_Click(object sender, EventArgs e)
+        {
+            processListBox.Items.Clear();
+            UpdateProcessView(searchProcessBox.Text);
+        }
+
+        private void sleepButton_Click(object sender, EventArgs e)
+        {
+            if (sleepButton.Text == "Abort")
+            {
+                abort++;
+            }
+            else if (selectedProcess != null)
+            {
+                process = Process.GetProcessesByName((string)selectedProcess)[0];
+                startTime = dateStart.Value;
+                endTime = dateEnd.Value;
+                processPath = process.MainModule.FileName.ToString();
+                sleepTextBox.Text = $"The process '{(string)selectedProcess}' will be shut down between {startTime} and {endTime}";
+                DialogResult dialog = MessageBox.Show("This will cause the selected process to be shut down in specified time interval. Continue?", "Notice", MessageBoxButtons.OKCancel);
+                if (dialog == DialogResult.OK)
+                {
+                    ToggleInteractables(false);
+                    sleepButton.Text = "Abort";
+                    Task.Factory.StartNew(() => CheckIfProcessIsAsleep());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a process first.", "No process selected", MessageBoxButtons.OK);
+            }
+        }
+
+        private void CheckIfProcessIsAsleep()
+        {
+            while (true)
+            {
+                if (abort == 1)
+                {
+                    abort--;
+                    BeginInvoke(() =>
+                    {
+                        ToggleInteractables(true);
+                        sleepButton.Text = "Sleep";
+                        sleepTextBox.Text = "";
+                    });
+                    break;
+                }
+                if (DateTime.Compare(startTime, DateTime.Now) == -1 && process != null && processKilled == 0)
+                {
+                    process.Kill();
+                    processListBox.Items.Clear();
+                    Thread.Sleep(50);
+                    UpdateProcessView(searchProcessBox.Text);
+                    processKilled++;
+                }
+                if (DateTime.Compare(endTime, DateTime.Now) == -1 && process != null && processKilled == 1)
+                {
+                    processKilled++;
+                    ProcessStartInfo start = new()
+                    {
+                        UseShellExecute = true,
+                        FileName = processPath,
+                        WindowStyle = ProcessWindowStyle.Hidden,
+                        CreateNoWindow = true
+                    };
+                    using (Process proc = Process.Start(start))
+                    {
+                        BeginInvoke(() =>
+                        {
+                            ToggleInteractables(true);
+                            sleepTextBox.Text = $"The process '{(string)selectedProcess}' was started at {endTime}";
+                        });
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ToggleInteractables(bool state)
+        {
+            processListBox.Enabled = state;
+            searchProcessBox.Enabled = state;
+            killProcessBtn.Enabled = state;
+            refreshProcessBtn.Enabled = state;
+            dateStart.Enabled = state;
+            dateEnd.Enabled = state;
         }
     }
 }

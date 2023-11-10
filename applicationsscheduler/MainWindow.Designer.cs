@@ -91,6 +91,7 @@
             refreshProcessBtn.TabIndex = 4;
             refreshProcessBtn.Text = "Refresh";
             refreshProcessBtn.UseVisualStyleBackColor = true;
+            refreshProcessBtn.Click += refreshProcessBtn_Click;
             // 
             // label2
             // 
@@ -160,6 +161,7 @@
             sleepButton.TabIndex = 12;
             sleepButton.Text = "Sleep";
             sleepButton.UseVisualStyleBackColor = true;
+            sleepButton.Click += sleepButton_Click;
             // 
             // currentTimeLabel
             // 
@@ -191,6 +193,7 @@
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "MainWindow";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Applications scheduler";
