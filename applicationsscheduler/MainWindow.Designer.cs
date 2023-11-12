@@ -71,6 +71,7 @@
             processListBox.Name = "processListBox";
             processListBox.Size = new Size(182, 169);
             processListBox.TabIndex = 2;
+            processListBox.TabStop = false;
             processListBox.SelectedValueChanged += processListBox_SelectedValueChanged;
             // 
             // killProcessBtn
@@ -78,7 +79,7 @@
             killProcessBtn.Location = new Point(12, 210);
             killProcessBtn.Name = "killProcessBtn";
             killProcessBtn.Size = new Size(46, 23);
-            killProcessBtn.TabIndex = 3;
+            killProcessBtn.TabIndex = 5;
             killProcessBtn.Text = "Kill";
             killProcessBtn.UseVisualStyleBackColor = true;
             killProcessBtn.Click += killProcessBtn_Click;
@@ -88,7 +89,7 @@
             refreshProcessBtn.Location = new Point(64, 210);
             refreshProcessBtn.Name = "refreshProcessBtn";
             refreshProcessBtn.Size = new Size(67, 23);
-            refreshProcessBtn.TabIndex = 4;
+            refreshProcessBtn.TabIndex = 6;
             refreshProcessBtn.Text = "Refresh";
             refreshProcessBtn.UseVisualStyleBackColor = true;
             refreshProcessBtn.Click += refreshProcessBtn_Click;
@@ -134,7 +135,7 @@
             dateStart.Location = new Point(251, 46);
             dateStart.Name = "dateStart";
             dateStart.Size = new Size(162, 23);
-            dateStart.TabIndex = 9;
+            dateStart.TabIndex = 2;
             // 
             // dateEnd
             // 
@@ -142,7 +143,7 @@
             dateEnd.Location = new Point(251, 75);
             dateEnd.Name = "dateEnd";
             dateEnd.Size = new Size(162, 23);
-            dateEnd.TabIndex = 10;
+            dateEnd.TabIndex = 3;
             // 
             // sleepTextBox
             // 
@@ -152,13 +153,14 @@
             sleepTextBox.ReadOnly = true;
             sleepTextBox.Size = new Size(199, 71);
             sleepTextBox.TabIndex = 11;
+            sleepTextBox.TabStop = false;
             // 
             // sleepButton
             // 
             sleepButton.Location = new Point(214, 104);
             sleepButton.Name = "sleepButton";
             sleepButton.Size = new Size(199, 23);
-            sleepButton.TabIndex = 12;
+            sleepButton.TabIndex = 4;
             sleepButton.Text = "Sleep";
             sleepButton.UseVisualStyleBackColor = true;
             sleepButton.Click += sleepButton_Click;
